@@ -1,0 +1,181 @@
+/* 전체 페이지의 기본 스타일 설정 */
+* {
+    margin: 0;          /* 바깥쪽 여백을 0으로 설정 */
+    padding: 0;         /* 안쪽 여백을 0으로 설정 */
+    box-sizing: border-box; /* 박스 크기 계산 방식을 border-box로 설정 */
+}
+
+/* body 태그의 기본 스타일 */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 글꼴 설정 */
+    line-height: 1.6;   /* 줄 간격 설정 */
+    color: #333;        /* 글자 색상 설정 */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* 배경 그라데이션 */
+    min-height: 100vh;  /* 최소 높이를 화면 전체로 설정 */
+}
+
+/* 전체 컨테이너 스타일 */
+.container {
+    max-width: 800px;   /* 최대 너비 설정 */
+    margin: 0 auto;     /* 가운데 정렬 */
+    padding: 20px;      /* 안쪽 여백 */
+    background: white;   /* 배경색을 흰색으로 */
+    min-height: 100vh;  /* 최소 높이를 화면 전체로 */
+    box-shadow: 0 0 20px rgba(0,0,0,0.1); /* 그림자 효과 */
+}
+
+/* 헤더 섹션 스타일 */
+.header {
+    text-align: center; /* 텍스트 가운데 정렬 */
+    padding: 40px 0;    /* 위아래 여백 */
+    border-bottom: 3px solid #667eea; /* 아래쪽 테두리 */
+    margin-bottom: 30px; /* 아래쪽 여백 */
+}
+
+.name {
+    font-size: 3rem;    /* 글자 크기 */
+    color: #667eea;     /* 글자 색상 */
+    margin-bottom: 10px; /* 아래쪽 여백 */
+    font-weight: bold;  /* 글자 굵기 */
+}
+
+.title {
+    font-size: 1.2rem;  /* 글자 크기 */
+    color: #666;        /* 글자 색상 */
+    font-style: italic; /* 이탤릭체 */
+}
+
+/* 프로필 이미지 섹션 */
+.profile-section {
+    text-align: center; /* 가운데 정렬 */
+    margin-bottom: 40px; /* 아래쪽 여백 */
+}
+
+.profile-image {
+    display: inline-block; /* 인라인 블록으로 설정 */
+}
+
+.placeholder-image {
+    width: 150px;       /* 너비 */
+    height: 150px;      /* 높이 */
+    background: linear-gradient(45deg, #667eea, #764ba2); /* 배경 그라데이션 */
+    border-radius: 50%; /* 원형으로 만들기 */
+    display: flex;      /* 플렉스 박스 사용 */
+    align-items: center; /* 세로 가운데 정렬 */
+    justify-content: center; /* 가로 가운데 정렬 */
+    font-size: 4rem;    /* 이모지 크기 */
+    color: white;       /* 글자 색상 */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* 그림자 효과 */
+}
+
+/* 섹션 공통 스타일 */
+section {
+    margin-bottom: 40px; /* 아래쪽 여백 */
+    padding: 20px;      /* 안쪽 여백 */
+    background: #f8f9fa; /* 배경색 */
+    border-radius: 10px; /* 모서리 둥글게 */
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05); /* 그림자 효과 */
+}
+
+/* 섹션 제목 스타일 */
+section h2 {
+    color: #667eea;     /* 글자 색상 */
+    margin-bottom: 20px; /* 아래쪽 여백 */
+    font-size: 1.8rem;  /* 글자 크기 */
+    border-bottom: 2px solid #667eea; /* 아래쪽 테두리 */
+    padding-bottom: 10px; /* 아래쪽 안쪽 여백 */
+}
+
+/* 자기소개 텍스트 스타일 */
+.intro-text {
+    font-size: 1.1rem;  /* 글자 크기 */
+    line-height: 1.8;   /* 줄 간격 */
+    color: #555;        /* 글자 색상 */
+}
+
+/* 기술 스택 그리드 */
+.skills-grid {
+    display: grid;      /* 그리드 레이아웃 사용 */
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* 자동으로 열 개수 조정 */
+    gap: 15px;         /* 그리드 간격 */
+}
+
+.skill-item {
+    background: #667eea; /* 배경색 */
+    color: white;       /* 글자 색상 */
+    padding: 15px;     /* 안쪽 여백 */
+    border-radius: 25px; /* 모서리 둥글게 */
+    text-align: center; /* 가운데 정렬 */
+    font-weight: bold;  /* 글자 굵기 */
+    transition: transform 0.3s ease; /* 호버 효과를 위한 전환 */
+}
+
+.skill-item:hover {
+    transform: translateY(-3px); /* 마우스 올렸을 때 위로 이동 */
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4); /* 그림자 효과 */
+}
+
+/* 경험 아이템 스타일 */
+.experience-item {
+    background: white;   /* 배경색 */
+    padding: 20px;     /* 안쪽 여백 */
+    border-radius: 8px; /* 모서리 둥글게 */
+    margin-bottom: 20px; /* 아래쪽 여백 */
+    border-left: 4px solid #667eea; /* 왼쪽 테두리 */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 그림자 효과 */
+}
+
+.experience-item h3 {
+    color: #667eea;     /* 글자 색상 */
+    margin-bottom: 5px; /* 아래쪽 여백 */
+    font-size: 1.3rem; /* 글자 크기 */
+}
+
+.period {
+    color: #666;        /* 글자 색상 */
+    font-style: italic; /* 이탤릭체 */
+    margin-bottom: 10px; /* 아래쪽 여백 */
+    font-size: 0.9rem; /* 글자 크기 */
+}
+
+/* 연락처 정보 스타일 */
+.contact-info p {
+    margin-bottom: 10px; /* 아래쪽 여백 */
+    font-size: 1.1rem;  /* 글자 크기 */
+    color: #555;        /* 글자 색상 */
+}
+
+/* 푸터 스타일 */
+.footer {
+    text-align: center; /* 가운데 정렬 */
+    padding: 20px;     /* 안쪽 여백 */
+    color: #666;       /* 글자 색상 */
+    border-top: 1px solid #eee; /* 위쪽 테두리 */
+    margin-top: 40px;  /* 위쪽 여백 */
+}
+
+/* 반응형 디자인: 모바일 화면에서의 스타일 */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;  /* 안쪽 여백 줄이기 */
+        margin: 0;      /* 바깥쪽 여백 제거 */
+    }
+    
+    .name {
+        font-size: 2rem; /* 글자 크기 줄이기 */
+    }
+    
+    .placeholder-image {
+        width: 120px;   /* 크기 줄이기 */
+        height: 120px;  /* 크기 줄이기 */
+        font-size: 3rem; /* 이모지 크기 줄이기 */
+    }
+    
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2열로 고정 */
+    }
+    
+    section {
+        padding: 15px;  /* 안쪽 여백 줄이기 */
+    }
+} 
