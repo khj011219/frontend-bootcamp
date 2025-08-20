@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지뢰찾기</title>
+    <link rel="stylesheet" href="minesweeper.css">
+</head>
+<body>
+    <div class="game-container">
+        <h1>지뢰찾기</h1>
+        
+        <div class="game-info">
+            <div class="info-item">
+                <span>지뢰: </span>
+                <span id="mine-count">10</span>
+            </div>
+            <div class="info-item">
+                <span>시간: </span>
+                <span id="timer">0</span>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button onclick="newGame()">새 게임</button>
+            <select id="difficulty" onchange="changeDifficulty()">
+                <option value="easy">쉬움 (8x8, 지뢰 10개)</option>
+                <option value="medium">보통 (12x12, 지뢰 30개)</option>
+                <option value="hard">어려움 (16x16, 지뢰 50개)</option>
+            </select>
+        </div>
+
+        <div class="game-board" id="game-board"></div>
+
+        <div class="instructions">
+            <h3>게임 방법:</h3>
+            <ul>
+                <li>왼쪽 클릭: 칸을 열기</li>
+                <li>오른쪽 클릭: 깃발 표시/제거</li>
+                <li>지뢰가 없는 모든 칸을 열면 승리!</li>
+                <li>지뢰가 있는 칸을 클릭하면 게임 오버!</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        let board = [];
+        let mineCount = 10;
+        let boardSize = 8;
+        let gameOver = false;
+        let timer = 0;
+        let timerInterval;
+        let revealedCount = 0;
+
+        // 게임 초기화
+        function initGame() {
+            board = [];
+            gameOver = false;
+            revealedCount = 0;
+            timer = 0;
+            clearInterval(timerInterval);
+            
+            // 보드 생성
+            for (let i = 0; i < boardSize; i++) {
+                board[i] = [];
+                for (let j = 0; j < boardSize; j++) {
+                    board[i][j] = {
+                        isMine: false,
+                        isRevealed: false,
+                        isFlagged: false,
+                        neighborMines: 0
+                    };
+                }
+            }
+            
+            // 지뢰 배치
+            placeMines();
+            
+            // 주변 지뢰 개수 계산
+            calculateNeighborMines();
+            
+            // 보드 렌더링
+            renderBoard();
+            updateDisplay();
+        }
+
+        // 지뢰 배치
+        function placeMines() {
+            let minesPlaced = 0;
+            while (minesPlaced < mineCount) {
+                let row = Math.floor(Math.random() * boardSize);
+                let col = Math.floor(Math.random() * boardSize);
+                
+                if (!board[row][col].isMine) {
+                    board[row][col].isMine = true;
+                    minesPlaced++;
+                }
+            }
+        }
+
+        // 주변 지뢰 개수 계산
+        function calculateNeighborMines() {
+            for (let i = 0; i < boardSize; i++) {
+                for (let j = 0; j < boardSize; j++) {
+                    if (!board[i][j].isMine) {
+                        let count = 0;
+                        for (let di = -1; di <= 1; di++) {
+                            for (let dj = -1; dj <= 1; dj++) {
+                                let ni = i + di;
+                                let nj = j + dj;
+                                if (ni >= 0 && ni < boardSize && nj >= 0 && nj < boardSize) {
+                                    if (board[ni][nj].isMine) count++;
+                                }
+                            }
+                        }
+                        board[i][j].neighborMines = count;
+                    }
+                }
+            }
+        }
+
+        // 보드 렌더링
+        function renderBoard() {
+            const gameBoard = document.getElementById('game-board');
+            gameBoard.innerHTML = '';
+            gameBoard.style.gridTemplateColumns = `repeat(${boardSize}, 30px)`;
+            
+            for (let i = 0; i < boardSize; i++) {
+                for (let j = 0; j < boardSize; j++) {
+                    const cell = document.createElement('div');
+                    cell.className = 'cell';
+                    cell.dataset.row = i;
+                    cell.dataset.col = j;
+                    
+                    if (board[i][j].isRevealed) {
+                        cell.classList.add('revealed');
+                        if (board[i][j].isMine) {
+                            cell.classList.add('mine');
+                            cell.textContent = '💣';
+                        } else if (board[i][j].neighborMines > 0) {
+                            cell.textContent = board[i][j].neighborMines;
+                            cell.style.color = getNumberColor(board[i][j].neighborMines);
+                        }
+                    } else if (board[i][j].isFlagged) {
+                        cell.classList.add('flagged');
+                        cell.textContent = '🚩';
+                    }
+                    
+                    cell.addEventListener('click', (e) => handleLeftClick(i, j));
+                    cell.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        handleRightClick(i, j);
+                    });
+                    
+                    gameBoard.appendChild(cell);
+                }
+            }
+        }
+
+        // 왼쪽 클릭 처리
+        function handleLeftClick(row, col) {
+            if (gameOver || board[row][col].isFlagged || board[row][col].isRevealed) return;
+            
+            if (timer === 0) {
+                startTimer();
+            }
+            
+            if (board[row][col].isMine) {
+                gameOver = true;
+                revealAllMines();
+                alert('게임 오버! 지뢰를 클릭했습니다.');
+                clearInterval(timerInterval);
+                return;
+            }
+            
+            revealCell(row, col);
+            renderBoard();
+            
+            if (checkWin()) {
+                gameOver = true;
+                alert('축하합니다! 승리했습니다!');
+                clearInterval(timerInterval);
+            }
+        }
+
+        // 오른쪽 클릭 처리
+        function handleRightClick(row, col) {
+            if (gameOver || board[row][col].isRevealed) return;
+            
+            board[row][col].isFlagged = !board[row][col].isFlagged;
+            renderBoard();
+            updateDisplay();
+        }
+
+        // 칸 열기
+        function revealCell(row, col) {
+            if (row < 0 || row >= boardSize || col < 0 || col >= boardSize) return;
+            if (board[row][col].isRevealed || board[row][col].isFlagged) return;
+            
+            board[row][col].isRevealed = true;
+            revealedCount++;
+            
+            if (board[row][col].neighborMines === 0) {
+                // 주변 칸들도 자동으로 열기
+                for (let di = -1; di <= 1; di++) {
+                    for (let dj = -1; dj <= 1; dj++) {
+                        revealCell(row + di, col + dj);
+                    }
+                }
+            }
+        }
+
+        // 모든 지뢰 표시
+        function revealAllMines() {
+            for (let i = 0; i < boardSize; i++) {
+                for (let j = 0; j < boardSize; j++) {
+                    if (board[i][j].isMine) {
+                        board[i][j].isRevealed = true;
+                    }
+                }
+            }
+            renderBoard();
+        }
+
+        // 승리 확인
+        function checkWin() {
+            return revealedCount === (boardSize * boardSize - mineCount);
+        }
+
+        // 새 게임
+        function newGame() {
+            initGame();
+        }
+
+        // 난이도 변경
+        function changeDifficulty() {
+            const difficulty = document.getElementById('difficulty').value;
+            switch (difficulty) {
+                case 'easy':
+                    boardSize = 8;
+                    mineCount = 10;
+                    break;
+                case 'medium':
+                    boardSize = 12;
+                    mineCount = 30;
+                    break;
+                case 'hard':
+                    boardSize = 16;
+                    mineCount = 50;
+                    break;
+            }
+            initGame();
+        }
+
+        // 타이머 시작
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                timer++;
+                updateDisplay();
+            }, 1000);
+        }
+
+        // 화면 업데이트
+        function updateDisplay() {
+            document.getElementById('mine-count').textContent = mineCount;
+            document.getElementById('timer').textContent = timer;
+        }
+
+        // 숫자 색상
+        function getNumberColor(num) {
+            const colors = ['', 'blue', 'green', 'red', 'purple', 'maroon', 'turquoise', 'black', 'gray'];
+            return colors[num] || 'black';
+        }
+
+        // 게임 시작
+        initGame();
+    </script>
+</body>
+</html>

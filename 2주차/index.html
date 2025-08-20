@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2주차 프로젝트 - 웹 게임들</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .description {
+            color: #666;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .projects {
+            display: grid;
+            gap: 20px;
+        }
+
+        .project-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: block;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card h2 {
+            margin: 0 0 10px 0;
+            font-size: 1.5em;
+        }
+
+        .project-card p {
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .calculator-card {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+
+        .vending-card {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        .minesweeper-card {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 웹 게임 프로젝트</h1>
+        <p class="description">
+            HTML과 CSS를 사용해서 만든 간단한 웹 게임들입니다.<br>
+            각 게임을 클릭해서 즐겨보세요!
+        </p>
+        
+        <div class="projects">
+            <a href="calculator.html" class="project-card calculator-card">
+                <h2>🧮 계산기</h2>
+                <p>기본적인 사칙연산이 가능한 계산기입니다.</p>
+            </a>
+            
+            <a href="vending-machine.html" class="project-card vending-card">
+                <h2>🥤 자판기</h2>
+                <p>동전을 투입하고 음료를 구매할 수 있는 자판기입니다.</p>
+            </a>
+            
+            <a href="minesweeper.html" class="project-card minesweeper-card">
+                <h2>💣 지뢰찾기</h2>
+                <p>전통적인 지뢰찾기 게임입니다. 난이도 조절이 가능합니다.</p>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

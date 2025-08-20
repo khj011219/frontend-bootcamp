@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>자판기</title>
+    <link rel="stylesheet" href="vending-machine.css">
+</head>
+<body>
+    <div class="vending-machine">
+        <h1>자판기</h1>
+        
+        <div class="display-panel">
+            <div class="money-display">
+                <span>투입된 금액: </span>
+                <span id="money">0</span>원
+            </div>
+            <div class="message" id="message">동전을 투입하세요!</div>
+        </div>
+
+        <div class="products">
+            <div class="product" onclick="selectProduct('콜라', 1000)">
+                <div class="product-name">콜라</div>
+                <div class="product-price">1000원</div>
+            </div>
+            <div class="product" onclick="selectProduct('사이다', 1200)">
+                <div class="product-name">사이다</div>
+                <div class="product-price">1200원</div>
+            </div>
+            <div class="product" onclick="selectProduct('커피', 800)">
+                <div class="product-name">커피</div>
+                <div class="product-price">800원</div>
+            </div>
+            <div class="product" onclick="selectProduct('물', 500)">
+                <div class="product-name">물</div>
+                <div class="product-price">500원</div>
+            </div>
+        </div>
+
+        <div class="coin-panel">
+            <h3>동전 투입</h3>
+            <div class="coins">
+                <button onclick="insertCoin(100)">100원</button>
+                <button onclick="insertCoin(500)">500원</button>
+                <button onclick="insertCoin(1000)">1000원</button>
+            </div>
+        </div>
+
+        <div class="control-panel">
+            <button onclick="returnMoney()" class="return-btn">거스름돈 반환</button>
+            <button onclick="resetMachine()" class="reset-btn">초기화</button>
+        </div>
+
+        <div class="purchase-history">
+            <h3>구매 내역</h3>
+            <div id="history"></div>
+        </div>
+    </div>
+
+    <script>
+        let currentMoney = 0;
+        let purchaseHistory = [];
+
+        function insertCoin(amount) {
+            currentMoney += amount;
+            updateDisplay();
+            showMessage(amount + '원을 투입했습니다.');
+        }
+
+        function selectProduct(name, price) {
+            if (currentMoney >= price) {
+                currentMoney -= price;
+                updateDisplay();
+                showMessage(name + '을(를) 구매했습니다!');
+                
+                // 구매 내역에 추가
+                purchaseHistory.push({
+                    name: name,
+                    price: price,
+                    time: new Date().toLocaleTimeString()
+                });
+                updateHistory();
+            } else {
+                showMessage('금액이 부족합니다. 더 많은 동전을 투입하세요.');
+            }
+        }
+
+        function returnMoney() {
+            if (currentMoney > 0) {
+                showMessage(currentMoney + '원을 반환했습니다.');
+                currentMoney = 0;
+                updateDisplay();
+            } else {
+                showMessage('반환할 금액이 없습니다.');
+            }
+        }
+
+        function resetMachine() {
+            currentMoney = 0;
+            purchaseHistory = [];
+            updateDisplay();
+            updateHistory();
+            showMessage('자판기가 초기화되었습니다.');
+        }
+
+        function updateDisplay() {
+            document.getElementById('money').textContent = currentMoney;
+        }
+
+        function showMessage(msg) {
+            document.getElementById('message').textContent = msg;
+        }
+
+        function updateHistory() {
+            const historyDiv = document.getElementById('history');
+            historyDiv.innerHTML = '';
+            
+            purchaseHistory.forEach(item => {
+                const historyItem = document.createElement('div');
+                historyItem.className = 'history-item';
+                historyItem.textContent = `${item.time} - ${item.name} (${item.price}원)`;
+                historyDiv.appendChild(historyItem);
+            });
+        }
+    </script>
+</body>
+</html>
