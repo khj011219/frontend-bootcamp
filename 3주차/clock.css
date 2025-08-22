@@ -1,0 +1,363 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  font-family: Arial, sans-serif;
+  background-color: beige;
+  min-height: 50vh;
+  color: black;
+}
+
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  min-height: 50vh;
+}
+
+.header{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+  padding: 20px;
+  background-color:white;
+  border-radius: 20px;
+  border: 5px solid rgba(148, 17, 17, 0.76);
+}
+
+.title{
+  font-size: 30px;
+  font-weight:bold;
+  color:black;
+}
+
+.battery{
+  padding: 8px 16px;
+  background-color: rgb(86, 224, 51);
+  border-radius: 20px;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.battery:hover{
+  transform: scale(1.05);
+}
+
+.battery.low{
+  background-color: yellow;
+}
+
+.battery.critical{
+  background-color: red;
+}
+
+.main-content{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  margin-bottom: 20px;
+}
+
+.clock{
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+  border: 5px solid rgba(148, 17, 17, 0.76);
+
+}
+
+.clock h2{
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.time-display{
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+#time{
+  font-size: 30px;
+  font-weight: bold;
+  font-family: "Courier New", monospace;
+}
+
+/* 배터리 0%일 때 화면 블랙아웃 */
+.time-display.blackout{
+  background-color: #000;
+  border-color: #000;
+}
+.time-display.blackout #time{
+  color: transparent;
+}
+
+.alarm{
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+  border: 5px solid rgba(148, 17, 17, 0.76);
+
+}
+
+.alarm h2{
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.alarm-list{
+  border: 2px solid black;
+  border-radius: 10px;
+  padding: 10px;
+  min-height: 80px;
+  background-color: white;
+}
+
+/* 알람 아이템 카드 스타일 */
+.alarm-item{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+  background: #f8f9fa;
+  border-radius: 10px;
+  border-left: 4px solid #3498db;
+  transition: background-color .2s ease, transform .2s ease;
+}
+
+.alarm-item:last-child{ margin-bottom: 0; }
+
+.alarm-item:hover{
+  background: #edf2f7;
+  transform: translateX(4px);
+}
+
+.alarm-time{
+  font-size: 18px;
+  font-weight: 700;
+  font-family: "Courier New", monospace;
+  color: #2c3e50;
+}
+
+.delete-btn{
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  line-height: 1;
+  transition: transform .15s ease, background-color .15s ease;
+}
+
+.delete-btn:hover{ background: #c0392b; transform: scale(1.08); }
+.delete-btn:active{ transform: scale(0.95); }
+
+.alarm-settings{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  background-color: white;
+  border-radius: 20px;
+  padding: 30px;
+  margin-bottom: 20px;
+  border: 5px solid rgba(148, 17, 17, 0.76);
+
+}
+
+.alarm-input-group{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.alarm-input-group label{
+  text-align: center;
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.input-controls{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.time-button{
+  padding: 8px;
+  background-color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: all 0.2s ease;
+  min-height: 40px;
+}
+
+.time-button:hover{
+  background-color: gray;
+  transform: scale(1.2);
+}
+
+.time-button:active{
+  transform: scale(0.95);
+}
+
+input[type='number']{
+  padding: 12px;
+  border: 2px solid black;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+  font-family: "Courier New", monospace;
+  transition: border-color 0.3s ease;
+}
+
+input[type="number"]:focus{
+  outline: none;
+  border-color: black;
+}
+
+.add-button{
+  width: 100%;
+  height: 90%;
+  padding: 15px;
+  background-color: white;
+  border: none;
+  border-radius: 20px;
+  font-size: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 5px solid rgba(148, 17, 17, 0.76);
+
+}
+
+.add-button:hover{
+  background-color: beige;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px){
+  .main-content{
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .alarm-settings{
+    grid-template-columns: 1fr;
+    padding: 20px;
+  }
+  .clock, .alarm{padding: 20px}
+  #time {font-size: 24px}
+}
+
+.time-button :disabled{
+  opacity: .5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+input[type='number']:focus{
+  outline: none;
+  border-color: black;
+}
+
+input[type='number']:focus-visible{
+  outline: 2px solid black;
+  outline-offset: 2px;
+}
+
+input[type='number'].invalid{
+  border-color: black;
+  background-color: white;
+}
+
+.toast-container{
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+.toast{
+  background-color: white;
+  padding: 12px 16px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  animation: slideIn .3s ease;
+}
+
+.toast.success{ background: #27ae60; }
+.toast.warning{ background: #f39c12; }
+.toast.error{ background: #e74c3c; }
+
+@keyframes slideIn{
+  from{ transform: translateX(100%); opacity: 0; }
+  to{ transform: translateX(0); opacity: 1; }
+}
+
+.alarm-settings{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.alarm-input-group{
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.input-controls{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.time-button{
+  width: 48px;
+  height: 36px;
+}
+
+.clock h2, .alarm h2{ font-size: 18px; color: #2c3e50; letter-spacing: .3px; }
+.alarm-settings, .clock, .alarm{ line-height: 1.4; }
+.alarm-input-group label{ font-size: 14px; opacity: .9; }
+
+@media (max-width: 768px){
+  .main-content{ grid-template-columns: 1fr; gap: 16px; }
+  .alarm-settings{ grid-template-columns: 1fr; padding: 20px; }
+  #time{ font-size: 24px; }
+}
+
+.toast-container{ position: fixed; top: 20px; right: 20px; z-index: 1000; }
+.toast{ background:#2c3e50; color:#fff; padding:12px 16px; border-radius:10px; margin-bottom:10px; box-shadow:0 4px 16px rgba(0,0,0,.2); animation:slideIn .3s ease; }
+.toast.success{ background:#27ae60; }
+.toast.warning{ background:#f39c12; }
+.toast.error{ background:#e74c3c; }
+@keyframes slideIn{ from{ transform:translateX(100%); opacity:0; } to{ transform:translateX(0); opacity:1; } }
+.time-button:disabled{ opacity:.5; cursor:not-allowed; transform:none; }
+input[type="number"].invalid{ border-color:#e74c3c; background:#fdf2f2; }
+input[type="number"]:focus-visible{ outline:2px solid black; outline-offset:2px; }
+.alarm-list{ max-height: 240px; overflow-y: auto; }
+.alarm-list::-webkit-scrollbar{ width:8px; }
+.alarm-list::-webkit-scrollbar-track{ background:#f1f1f1; border-radius:4px; }
+.alarm-list::-webkit-scrollbar-thumb{ background:#c1c1c1; border-radius:4px; }
+.alarm-list::-webkit-scrollbar-thumb:hover{ background:#a8a8a8; }
+.battery{ transition: background-color .25s ease, transform .2s ease; }
