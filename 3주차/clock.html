@@ -1,68 +1,78 @@
 <!DOCTYPE html>
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>project1 시계만들기</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="container">
-    <header class="header">
-      <h1 class="title">Project1 시계</h1>
-      <div class="battery" id="battery">
-        <span id="batteryLevel">100%</span>
-      </div>
-    </header>
-
-    <main class="main-content">
-      <div class="clock">
-        <h2>현재 시각</h2>
-        <div class="time-display">
-          <span id="time">2025-08-22 01:25:00</span>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>project1 시계만들기</title>
+    <link rel="stylesheet" href="clock.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <h1 class="title">Project1 시계</h1>
+        <div class="battery" id="battery">
+          <span id="batteryLevel">100%</span>
         </div>
-      </div>
+      </header>
 
-      <div class="alarm">
-        <h2>알람</h2>
-        <div class="alarm-list">
-
-        </div>
-      </div>
-
-      <div class="alarm-settings">
-        <div class="alarm-input-group">
-          <label for="hourInput">hour</label>
-          <div class="input-controls">
-            <button class="time-button" id="hourup">▲</button>
-            <input type="number" id="hourInput" min="0" max="23" value="0">
-            <button class="time-button" id="hourdown">▼</button>
+      <main class="main-content">
+        <div class="clock">
+          <h2>현재 시각</h2>
+          <div class="time-display">
+            <span id="time">2025-08-22 01:25:00</span>
           </div>
         </div>
 
-        <div class="alarm-input-group">
-          <label for="minuteInput">minute</label>
-          <div class="input-controls">
-            <button class="time-button" id="minuteup">▲</button>
-            <input type="number" id="minuteInput" min="0" max="59" value="0">
-            <button class="time-button" id="minutedown">▼</button>
-          </div>
+        <div class="alarm">
+          <h2>알람</h2>
+          <div class="alarm-list"></div>
         </div>
 
-        <div class="alarm-input-group">
-          <label for="secondInput">second</label>
-          <div class="input-controls">
-            <button class="time-button" id="secondup">▲</button>
-            <input type="number" id="secondInput" min="0" max="59" value="0">
-            <button class="time-button" id="seconddown">▼</button>
+        <div class="alarm-settings">
+          <div class="alarm-input-group">
+            <label for="hourInput">hour</label>
+            <div class="input-controls">
+              <button class="time-button" id="hourup">▲</button>
+              <input type="number" id="hourInput" min="0" max="23" value="0" />
+              <button class="time-button" id="hourdown">▼</button>
+            </div>
+          </div>
+
+          <div class="alarm-input-group">
+            <label for="minuteInput">minute</label>
+            <div class="input-controls">
+              <button class="time-button" id="minuteup">▲</button>
+              <input
+                type="number"
+                id="minuteInput"
+                min="0"
+                max="59"
+                value="0"
+              />
+              <button class="time-button" id="minutedown">▼</button>
+            </div>
+          </div>
+
+          <div class="alarm-input-group">
+            <label for="secondInput">second</label>
+            <div class="input-controls">
+              <button class="time-button" id="secondup">▲</button>
+              <input
+                type="number"
+                id="secondInput"
+                min="0"
+                max="59"
+                value="0"
+              />
+              <button class="time-button" id="seconddown">▼</button>
+            </div>
           </div>
         </div>
-      </div>
-      <button class="add-button" id="addAlarm">add</button>
-    </main>
+        <button class="add-button" id="addAlarm">add</button>
+      </main>
 
-    <div class="toast-container" id="toastcontainer"></div>
-  </div>
-  <script src="app.js"></script>
-</body>
+      <div class="toast-container" id="toastcontainer"></div>
+    </div>
+    <script src="clock.js"></script>
+  </body>
 </html>
