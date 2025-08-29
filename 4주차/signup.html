@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>project2 회원가입</title>
+    <link rel="stylesheet" href="signup.css" />
+    <script defer src="signup.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>회원가입</h1>
+
+      <form id="signup-form" class="card" autocomplete="off">
+        <div class="field">
+          <label for="userId">아이디</label>
+          <div class="row">
+            <input
+              type="text"
+              id="userId"
+              placeholder="아이디를 입력하세요"
+              required
+            />
+            <button type="button" id="checkIdBtn" class="btn">중복확인</button>
+          </div>
+          <p id="idCheckText" class="help"></p>
+        </div>
+
+        <div class="field">
+          <label for="password">비밀번호</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="비밀번호를 입력하세요"
+            required
+          />
+          <p id="pwRuleText" class="help">8자 이상, 공백 없음</p>
+        </div>
+
+        <div class="field">
+          <label for="passwordConfirm">비밀번호 확인</label>
+          <input
+            type="password"
+            id="passwordConfirm"
+            placeholder="비밀번호를 다시 입력하세요"
+            required
+          />
+          <p id="matchText" class="help"></p>
+        </div>
+
+        <button type="submit" class="btn primary">가입</button>
+      </form>
+    </div>
+  </body>
+</html>

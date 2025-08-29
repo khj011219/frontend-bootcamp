@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>project1 todo</title>
+    <link rel="stylesheet" href="todo.css" />
+    <script defer src="todo.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <h1>일정 추가</h1>
+
+      <form id="todo-form" class="card">
+        <div class="field">
+          <label for="title">제목</label>
+          <input
+            type="text"
+            id="title"
+            placeholder="제목을 입력하세요"
+            required
+          />
+        </div>
+        <div class="field">
+          <label for="date">날짜</label>
+          <input type="date" id="date" required />
+        </div>
+        <div class="field">
+          <label for="memo">메모</label>
+          <textarea
+            id="memo"
+            rows="3"
+            placeholder="메모를 입력하세요 (선택)"
+          ></textarea>
+        </div>
+        <button type="submit" class="btn primary">추가</button>
+      </form>
+
+      <h2>일정 목록</h2>
+      <div id="todo-list" class="list"></div>
+    </div>
+  </body>
+</html>
